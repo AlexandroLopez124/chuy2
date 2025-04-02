@@ -25,20 +25,7 @@ const ProductCard: React.FC<Props> = ({ productData }) => {
       {productData.discountPercent > 0 && (
         <div className='product-card__discount-percent'>-{productData.discountPercent}%</div>
       )}
-      <div className='product-card__tools'>
-        <button className='product-card__tools-tool'>
-          <BiGitCompare size={20} />
-          <span className='product-card__tools-tool__info'>compare</span>
-        </button>
-        <button className='product-card__tools-tool'>
-          <BiSearch size={20} />
-          <span className='product-card__tools-tool__info'>quick review</span>
-        </button>
-        <button className='product-card__tools-tool'>
-          <BiHeart size={20} />
-          <span className='product-card__tools-tool__info'>add to favourite</span>
-        </button>
-      </div>
+
       <div className='product-card__image'>
         <img
           className='product-card__image-image'
