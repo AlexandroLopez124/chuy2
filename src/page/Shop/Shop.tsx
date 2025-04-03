@@ -19,15 +19,27 @@ const Shop: FC = () => {
   const [allProductSize, setAllProductSize] = useState<number>(0);
   const [lastProduct, setLastProduct] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
   const [filterdProducts, setFilterdProducts] = useState<IProducts[]>([]);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+
+  const categories = [
+    { name: 'CONCACAF' },
+    { name: 'UEFA' },
+    { name: 'CONMEBOL' },
+    { name: 'SELECCIONES' },
+  ];
+
+  const filterByCategory = (catagory: string) => {
+    const filtered = products.filter(product => product.catagory === catagory);
+    setFilterdProducts(filtered);
+    setIsFilterOpen(false); // Cierra el menú al seleccionar
+  };
 
   useEffect(() => {
     const allProducts: any[] = [];
     setLoading(true);
     (async () => {
       try {
-        // set all product in coloection size
         setAllProductSize((await getDocs(collection(db, 'products'))).size);
-        // query to get first 10 products;
         const querySnap = query(collection(db, 'products'), limit(10));
         const snapShot = await getDocs(querySnap);
         snapShot.forEach((doc) => {
@@ -40,12 +52,11 @@ const Shop: FC = () => {
         setProducts(allProducts);
         setFilterdProducts(allProducts);
       } catch (error) {
-        errorToast('No se puede cargar los productos', 'Por favor, Intentelo de nuevo');
+        errorToast('No se pudieron cargar los productos', 'Inténtalo de nuevo');
       }
     })();
   }, []);
 
-  // each time that call load 10 more products
   const loadMoreProducts = async () => {
     const productsArray: any = [];
     try {
@@ -66,13 +77,15 @@ const Shop: FC = () => {
     }
   };
 
-  // check when user type or product add search with the search query
   useEffect(() => {
-    const filterd = products.filter((product) => product.name.toLowerCase().includes(searchQuery));
-    setFilterdProducts(filterd);
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilterdProducts(filtered);
   }, [products, searchQuery]);
 
   const { elementRef } = useInView(loadMoreProducts);
+  
   return (
     <>
       <Container>
@@ -84,14 +97,44 @@ const Shop: FC = () => {
                 value={searchQuery}
                 className='shop__head__search-input'
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder='busca productos'
+                placeholder='Busca productos'
                 type='text'
               />
             </div>
-            <div className='shop__head__filter'>
-              <Button title='No hay, upps' className='shop__head__filter-button secoundry'>
-                filtro
+            <div className='shop__head__filter relative'>
+              <Button
+                title='Filtro'
+                className='shop__head__filter-button secoundry'
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+              >
+                Filtro
               </Button>
+              {isFilterOpen && (
+                <div className='absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md border border-gray-200'>
+                  <ul className='py-2'>
+                    {categories.map((catagory, index) => (
+                      <li key={index} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        <button 
+                          onClick={() => filterByCategory(catagory.name)} 
+                          className="block text-gray-700 w-full text-left"
+                          style={{ appearance: 'none', border: 'none', background: 'none' }}
+                        >
+                          {catagory.name}
+                        </button>
+                      </li>
+                    ))}
+                    <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                      <button 
+                        onClick={() => setFilterdProducts(products)} 
+                        className="block text-gray-700 w-full text-left"
+                        style={{ appearance: 'none', border: 'none', background: 'none' }}
+                      >
+                        MOSTRAR TODOS
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div className='shop__products-section'>
@@ -105,12 +148,13 @@ const Shop: FC = () => {
                   <ProductCard productData={product} />
                 </Fragment>
               ))}
-
               <div ref={elementRef}></div>
             </ProductContainer>
             {filterdProducts.length <= 0 && (
               <div className='shop__products__not-found'>
-                <h4 className='shop__products__not-found__text'>{searchQuery} no encontrado</h4>
+                <h4 className='shop__products__not-found__text'>
+                  No se encontraron productos
+                </h4>
               </div>
             )}
             {loadMoreLoading && <Loader />}
