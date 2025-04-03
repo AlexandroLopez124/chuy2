@@ -16,16 +16,16 @@ const Profile: React.FC = () => {
       </div>
       <div className='profile__mobile-navigation'>
         <Link className={`profile__mobile-navigation__link ${pathname === 'details' ? 'active' : ''}`} to='details'>
-          Profile Details
+          Detalles del perfil
         </Link>
         <Link className={`profile__mobile-navigation__link ${pathname === 'favourit' ? 'active' : ''}`} to='favourit'>
-          My favourit
+          Mis favoritos
         </Link>
         <Link className={`profile__mobile-navigation__link ${pathname === 'order' ? 'active' : ''}`} to='order'>
-          My order
+          Mis pedidos
         </Link>
         <Link className={`profile__mobile-navigation__link ${pathname === 'setting' ? 'active' : ''}`} to='setting'>
-          Account Setting
+          Configuración de la cuenta
         </Link>
       </div>
       <h2 className='profile__mobile__name'>{user.displayName}</h2>
@@ -34,9 +34,9 @@ const Profile: React.FC = () => {
           <Outlet />
         ) : (
           <div>
-            <h2 className='profile__content__welcome-message '>welcome {user.displayName || user.phoneNumber} </h2>
+            <h2 className='profile__content__welcome-message '>Bienvenido {user.displayName || user.phoneNumber} </h2>
             <p className='profile__content__welcome-sub-message'>
-              navigate between profile pages by link in left sidebar{' '}
+            Navegar entre las páginas de perfil mediante un enlace en la barra lateral izquierda{' '}
             </p>
           </div>
         )}

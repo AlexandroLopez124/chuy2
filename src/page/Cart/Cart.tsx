@@ -50,7 +50,7 @@ const Cart: FC = () => {
         }
       }
       if (!coponData.hasOwnProperty(values.copon)) {
-        errorToast('copon code is not correct', 'try " TEST " to get 20% discount');
+        errorToast('Codigo del cupón es incorrecto', 'Intente " TEST " para obtener un 20% de descuento');
       }
     } else {
       //if we have copon , remove it
@@ -66,17 +66,16 @@ const Cart: FC = () => {
   const discount: any = ((totalProductsPrice * copon.percent) / 100).toFixed(2);
   return (
     <Container>
-      <h2 className='cart-page__title'>Shoping cart</h2>
+      <h2 className='cart-page__title'>Carrito de compra</h2>
       <div className='cart-page'>
         <div className='cart-page__right'>
           <div className='cart-page__right__summery-box'>
-            <h3 className='cart-page__right__summery-box__title'>summery</h3>
+            <h3 className='cart-page__right__summery-box__title'>Resumen</h3>
             <p className='cart-page__right__summery-box__discription'>
-              you can use <span className='cart-page__test-important'>TEST</span> copon as test copon to see the
-              discount system
+              Puedes usar <span className='cart-page__test-important'>TEST</span> cupon como prueba cupon para ver el sistema de descuento
             </p>
             <h4 className='cart-page__right__summery-box__order-price'>
-              Order Total : {(totalProductsPrice - discount).toFixed(2)} $
+              Pedido Total : {(totalProductsPrice - discount).toFixed(2)} $
             </h4>
             <h4 className='cart-page__right__summery-box__discount-status'>
               {copon.percent > 0 ? `${copon.percent}% discount and you save ${discount} $` : ''}
@@ -95,7 +94,7 @@ const Cart: FC = () => {
               </Button>
             </form>
             <Button disabled={cart.length <= 0} onClick={submitToCheckout} className='cart-page__submit'>
-              continue to checkout
+              Continuar para verificar
             </Button>
           </div>
         </div>

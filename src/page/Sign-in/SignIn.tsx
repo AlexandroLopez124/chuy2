@@ -10,7 +10,7 @@ const SignIn: React.FC = () => {
     <div className='login-background'>
       <Login>
         <motion.div initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className='sign-in'>
-          <h2 className='sign-in__title'>Sign in with Google</h2>
+          <h2 className='sign-in__title'>Inicie con Google</h2>
           <GoogleAuth />
         </motion.div>
       </Login>

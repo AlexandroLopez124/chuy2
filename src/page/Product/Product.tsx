@@ -25,7 +25,7 @@ const Product: React.FC = () => {
     if (+values.quantity >= 1 && product?.inStock) {
       addToCart(product!, +values.quantity);
     } else {
-      errorToast('cant add product to cart', 'make sure put number in quantity input');
+      errorToast('No se puede añadir productos en el carrito', 'asegúrese de poner el número en la entrada de cantidad');
     }
   };
 
@@ -38,14 +38,14 @@ const Product: React.FC = () => {
         const data = await getDoc(docRef);
         if (!data.exists()) {
           navigate('/shop');
-          errorToast('product not found', 'make sure enter correct product id in url');
+          errorToast('Producto no encontrado', 'Asegurese poner correctamente el id del producto en la Url');
         }
         const productData: any = data.data();
         setProduct(productData);
       };
       fethProduct();
     } catch (error) {
-      errorToast('cant get data from server', 'make sure you have accses to internet ');
+      errorToast('No se puede obtener datos del servidor', 'Asegurese de estar conectado a internet');
       console.log(error);
     }
   }, [id]);
@@ -86,7 +86,7 @@ const Product: React.FC = () => {
     <Container>
       <div className='product-page__path'>
         <Link className='product-page__path-link' to='/'>
-          Home
+          Inicio
         </Link>{' '}
         /{' '}
         <Link className='product-page__path-link' to='/shop'>
@@ -113,18 +113,18 @@ const Product: React.FC = () => {
           <hr className='product-page__line' />
           <div className='product-page__status'>
             <h4 className='product-page__status__stock'>
-              <span style={{ color: '#0000009d' }}>Availability :</span>{' '}
+              <span style={{ color: '#0000009d' }}>Disponibilidad :</span>{' '}
               {product.inStock ? (
                 <span className='product-page__status__stock-text'>
-                  in stock <TiTick className='product-page__status__stock-icon' />
+                  En venta <TiTick className='product-page__status__stock-icon' />
                 </span>
               ) : (
                 <span className='product-page__status__stock-text'>
-                  out of stock <RiCloseFill className='product-page__status__out-stock-icon' />
+                  Sin producto <RiCloseFill className='product-page__status__out-stock-icon' />
                 </span>
               )}
             </h4>
-            <h4 className='product-page__status-text'>Imported from USA store</h4>
+            <h4 className='product-page__status-text'>Importado desde México</h4>
           </div>
           <hr className='product-page__line' />
           <form className='product-page__buy-section' onSubmit={handleSubmit}>
@@ -137,15 +137,13 @@ const Product: React.FC = () => {
             </Button>
           </form>
           <p className='product-page__warn-message'>
-            Note: Electronic products sold in US store operate on (110-120) volts, a step-down power converter is
-            required for the smooth device function. It is mandatory to know the wattage of the device in order to
-            choose the appropriate power converter. Recommended power converters
+            Nota: Esta camisa es exclusiva de esta confederación, asegure que es la que quiere....
           </p>
         </div>
       </div>
       <hr className='product-page__line' />
       <div className='product-page__discription'>
-        <h4 className='product-page__discription__title'>discription</h4>
+        <h4 className='product-page__discription__title'>Descripción</h4>
         <p className='product-page__discription__text'>{product.description}</p>
         <ul className='product-page__discription__features'>
           {product.features.map((feature, i) => (
@@ -157,7 +155,7 @@ const Product: React.FC = () => {
       </div>
       <hr className='product-page__line' />
       <div className='product-page__sugested-product'>
-        <h4 className='product-page__sugested-product__title'>related producs</h4>
+        <h4 className='product-page__sugested-product__title'>Productos relacionados</h4>
         <Suspense fallback={<Loader />}>
           <RelatedProduct catagory={product.catagory} currentProductId={product.id} />
         </Suspense>

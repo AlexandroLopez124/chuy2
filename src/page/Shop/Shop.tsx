@@ -40,7 +40,7 @@ const Shop: FC = () => {
         setProducts(allProducts);
         setFilterdProducts(allProducts);
       } catch (error) {
-        errorToast('cant load Products', 'please try again');
+        errorToast('No se puede cargar los productos', 'Por favor, Intentelo de nuevo');
       }
     })();
   }, []);
@@ -110,7 +110,7 @@ const Shop: FC = () => {
             </ProductContainer>
             {filterdProducts.length <= 0 && (
               <div className='shop__products__not-found'>
-                <h4 className='shop__products__not-found__text'>{searchQuery} was not Found</h4>
+                <h4 className='shop__products__not-found__text'>{searchQuery} no encontrado</h4>
               </div>
             )}
             {loadMoreLoading && <Loader />}

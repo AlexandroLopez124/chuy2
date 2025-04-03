@@ -14,14 +14,14 @@ const Thanks: FC = () => {
   return (
     <Container className='thanks-page__container'>
       <div className='thanks-page'>
-        <h2 className='thanks-page__title'>Thanks for your purchase</h2>
-        <p className='thanks-page__discription'>the order will be send to you</p>
+        <h2 className='thanks-page__title'>Gracias por su compra</h2>
+        <p className='thanks-page__discription'>El pedido será enviada hacia usted</p>
       </div>
       <hr className='thanks-page__line' />
       <div className='thanks-page__order'>
-        <h4 className='thanks-page__order-title'>your order Id : {location.state.orderId}</h4>
-        <p className='thanks-page__order-discription'>you can see your order in profile section</p>
-        <Button onClick={() => navigate('/profile/order')}>Go To My Order</Button>
+        <h4 className='thanks-page__order-title'>Tu Id del pedido es : {location.state.orderId}</h4>
+        <p className='thanks-page__order-discription'>Puedes ver tu pedido en el perfil</p>
+        <Button onClick={() => navigate('/profile/order')}>Ir a Mis Pedidos</Button>
       </div>
     </Container>
   );

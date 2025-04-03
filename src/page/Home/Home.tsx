@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   return (
     <div className='home'>
       <Slider />
-      <Suspense fallback={<h2>loading</h2>}>
+      <Suspense fallback={<h2>Cargando</h2>}>
         <Container>
           <NewProduct />
         </Container>

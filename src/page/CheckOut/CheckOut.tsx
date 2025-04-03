@@ -28,7 +28,7 @@ const CheckOut: FC = () => {
   useEffect(() => {
     if (!loading) {
       if (!isAuth) {
-        errorToast('you are not login', 'please log in to your account to continue');
+        errorToast('No estas iniciado', 'Por favor, inicia en tu cuenta para continuar');
       }
     }
   }, [loading, isAuth]);
@@ -54,12 +54,12 @@ const CheckOut: FC = () => {
           navigate('/thanks', { state: { inApp: true, orderId } });
         } catch (error) {
           setLoader(false);
-          errorToast('cant place your order', 'make sure that put evrything right');
+          errorToast('No se puede poner tu pedido', 'Asegurese que todo en orden');
         }
       }
     } else {
       setLoader(false);
-      errorToast('you are not login', 'please log in to your account to continue');
+      errorToast('No estas iniciado', 'Por favor, inicia en tu cuenta para continuar');
     }
   };
 
@@ -74,12 +74,12 @@ const CheckOut: FC = () => {
 
   return (
     <Container>
-      <h2 className='checkout__title'>Check Out</h2>
+      <h2 className='checkout__title'>Verificar</h2>
       <div className='checkout'>
         <div className='checkout__left'>
-          <h3 className='checkout__left__title'>Address details</h3>
+          <h3 className='checkout__left__title'>Detalles de la dirección</h3>
           <p className='checkout__left__discription'>
-            please fill the form below to order it,however you are not realy buy it{' '}
+          Por favor, rellene el siguiente formulario para pedirlo, sin embargo usted no está realmente comprando{' '}
           </p>
           <form onSubmit={handleSubmit} className='checkout__left__inputs'>
             <div className='checkout__left__inputs__two-coloum'>
@@ -137,12 +137,12 @@ const CheckOut: FC = () => {
               placeholder='Phone Number'
             />
             <Button type='submit' className='checkout__left__inputs__button'>
-              Order
+              Pedido
             </Button>
           </form>
         </div>
         <div className='checkout__right'>
-          <h4 className='checkout__right__title'>order summery</h4>
+          <h4 className='checkout__right__title'>Resumen del pedido</h4>
           <div className='checkout__right__box'>
             <div className='checkout__right__box__products'>
               {cart.map((product, i) => (
