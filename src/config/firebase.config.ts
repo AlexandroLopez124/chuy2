@@ -1,12 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 const firebaseConfig = {
-  apiKey: 'AIzaSyCgpPoHfxFbelxrBgvfJZ5ayk2mlvEpnpk',
-  authDomain: 'e-commerce-67ca1.firebaseapp.com',
-  projectId: 'e-commerce-67ca1',
-  storageBucket: 'e-commerce-67ca1.appspot.com',
-  messagingSenderId: '861579857940',
-  appId: '1:861579857940:web:6617f955b2506e7a6bd701',
+  apiKey: "AIzaSyBFW_VV3K4cb2_zNrqE2x_xtaDqSj3bD84",
+  authDomain: "tienda-de-jersey.firebaseapp.com",
+  projectId: "tienda-de-jersey",
+  storageBucket: "tienda-de-jersey.firebasestorage.app",
+  messagingSenderId: "476701240965",
+  appId: "1:476701240965:web:87eee6ddb139e4db3383ec"
 };
 
 const app = initializeApp(firebaseConfig);

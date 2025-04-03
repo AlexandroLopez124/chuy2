@@ -12,25 +12,25 @@ interface ISliderData {
 const sliderData: ISliderData[] = [
   {
     imgUrl: slider1,
-    title: 'Charge your phone safty',
+    title: 'Viste tu pasión, juega con estilo',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nunc pretium nisl, euismod.',
+      'Encuentra las mejores camisetas de tus equipos favoritos. ¡Compra ahora y lleva el fútbol contigo!',
     shopUrl: '#',
     productUrl: '#',
   },
   {
     imgUrl: slider2,
-    title: 'Get new cover from it',
+    title: 'Las mejores camisetas de clubes de todo el mundo',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nunc pretium nisl, euismod.',
+      'Desde Europa hasta América, encuentra los jerseys de los equipos más icónicos del planeta. ¡Elige el tuyo y juega con estilo!',
     shopUrl: '#',
     productUrl: '#',
   },
   {
     imgUrl: slider3,
-    title: 'New phone cover from it',
+    title: 'Viste los colores de tu selección favorita',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt consectetur, nisi nunc pretium nisl, euismod.',
+      'Apoya a tu país con camisetas de selecciones nacionales de todo el mundo. ¡Siente la pasión del fútbol y hazla tuya!',
     shopUrl: '#',
     productUrl: '#',
   },

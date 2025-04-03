@@ -4,19 +4,18 @@ export interface IMenuData {
   submenu?: IMenuData[];
 }
 const menuData: IMenuData[] = [
-  { name: 'HOME', url: '/' },
-  { name: 'SHOP', url: '/shop' },
-  { name: 'COMPARE', url: '/COMPARE' },
+  { name: 'INICIO', url: '/' },
+  { name: 'COMPRAR', url: '/shop' },
   {
-    name: 'CATAGORY',
+    name: 'CATEGORIA',
     url: '/catagory',
     submenu: [
-      { name: 'Gaming consoles', url: '/catagory/consols' },
-      { name: 'Phone', url: '/catagory/phone' },
-      { name: 'Accessories', url: '/catagory/accessories' },
-      { name: 'Headphone', url: '/catagory/headphone' },
+      { name: 'CONCACAF', url: '/catagory/consols' },
+      { name: 'UEFA', url: '/catagory/phone' },
+      { name: 'CONMEBOL', url: '/catagory/accessories' },
+      { name: 'SELECCIONES', url: '/catagory/headphone' },
     ],
   },
-  { name: 'ABOUT US', url: '/about' },
+  { name: 'CONOCENOS', url: '/about' },
 ];
 export default menuData;

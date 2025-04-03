@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from 'react';
-import { MdOutlineShoppingBag } from 'react-icons/md';
+import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useCartContext } from '../../context/Cart/CartContext';
 import useLocalStorage from '../../hook/useLocalStorage';
 import { IProducts } from '../../types/productsType';
@@ -43,13 +43,13 @@ const ShopCart: React.FC = () => {
           <span className={`cart-quantity ${addAnimation ? 'active' : ''}`}>
             {cart.reduce((prev, pro) => (prev += pro.quantity), 0)}
           </span>
-          <MdOutlineShoppingBag className='cart-icon' />
+          <MdOutlineShoppingCart className='cart-icon' />
         </div>
         <span className='cart-price'>{totalPrice} $</span>
       </div>
       <div className={`cart-wrapper ${isOpen ? 'open' : ''}`}>
         <div className='cart-wrapper__header'>
-          <h2 className='cart-title'>Shoping Cart</h2>
+          <h2 className='cart-title'>Carrito</h2>
         </div>
         <div className='cart-wrapper__body'>
           {cart.length <= 0 ? (

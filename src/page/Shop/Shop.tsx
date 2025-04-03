@@ -84,19 +84,19 @@ const Shop: FC = () => {
                 value={searchQuery}
                 className='shop__head__search-input'
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder='search products'
+                placeholder='busca productos'
                 type='text'
               />
             </div>
             <div className='shop__head__filter'>
-              <Button title='comming soon' className='shop__head__filter-button secoundry'>
-                filter
+              <Button title='No hay, upps' className='shop__head__filter-button secoundry'>
+                filtro
               </Button>
             </div>
           </div>
           <div className='shop__products-section'>
             <span className='shop__products__status'>
-              1-{filterdProducts.length} of {allProductSize} products
+              1-{filterdProducts.length} de {allProductSize} productos
             </span>
             <ProductContainer>
               {loading && new Array(10).fill(0).map((_, i) => <ProductCardLoading key={i} />)}

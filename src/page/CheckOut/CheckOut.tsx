@@ -164,7 +164,7 @@ const CheckOut: FC = () => {
             <h4 className='checkout__right__subtotal'>
               Subtotal ({cart.reduce((prev, product) => (prev += product.quantity), 0)})
             </h4>
-            <h4 className='checkout__right__totalPrice'>Toatal Order : {totalPrice} $</h4>
+            <h4 className='checkout__right__totalPrice'>Total : {totalPrice} $</h4>
           </div>
         </div>
       </div>

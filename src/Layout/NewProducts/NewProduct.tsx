@@ -29,9 +29,9 @@ const NewProduct: React.FC = () => {
   return (
     <div className='new-product'>
       <div className='new-product__head-title'>
-        <span className='head-title__notic'>Hurry up to buy</span>
-        <h2 className='head-title__main'>New Arrivals</h2>
-        <p className='head-title__des'>How can you evaluate content without design</p>
+        <span className='head-title__notic'>Rapidito que se  terminan</span>
+        <h2 className='head-title__main'>Nuevos productos</h2>
+        <p className='head-title__des'>Holi</p>
       </div>
       {loading && <Loader />}
       <div className='new-product__wrapper'>
@@ -40,7 +40,7 @@ const NewProduct: React.FC = () => {
         ))}
       </div>
       <div className='new-product__button-wrapper'>
-        <Button onClick={() => navigate('/shop')}>Go To Shop</Button>
+        <Button onClick={() => navigate('/shop')}>Ir a la tienda</Button>
       </div>
     </div>
   );

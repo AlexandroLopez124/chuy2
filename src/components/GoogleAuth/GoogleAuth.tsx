@@ -36,7 +36,7 @@ const GoogleAuth: FC = () => {
       naigate('/profile');
     } catch (error) {
       setLoader(false);
-      errorToast('cant login with google', 'please try again to log in');
+      errorToast('No se pudo iniciar sesion con google', 'por favor, intenta de nuevo');
     }
   };
   return (

@@ -103,8 +103,8 @@ const Cart: FC = () => {
           {cart.length <= 0 && (
             <>
               <img src={emptyCartImage} alt='empty cart' className='cart-page__left__empty-cart' />
-              <h4 className='cart-page__left__empty-cart__title'>you dont have any item in your cart</h4>
-              <Button onClick={() => navigate('/shop')}>Go shoping</Button>
+              <h4 className='cart-page__left__empty-cart__title'>No hay ningun articulo en tu carrito</h4>
+              <Button onClick={() => navigate('/shop')}>¡A comprar!</Button>
             </>
           )}
           <div className='cart-page__left-products'>

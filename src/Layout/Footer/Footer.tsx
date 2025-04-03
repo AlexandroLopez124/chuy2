@@ -6,7 +6,7 @@ const Footer: FC = () => {
     <footer className='footer'>
       <div className='sub-footer'>
         <span className='footer__copyright'>
-          2055{' '}
+          2025{' '}
           <a className='footer__link' href='https://github.com/mostafa-kheibary' target='_blank'>
             Chuy's Jerseys
           </a>
