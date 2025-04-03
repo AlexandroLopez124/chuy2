@@ -42,7 +42,7 @@ const GoogleAuth: FC = () => {
   return (
     <button onClick={handleAuth} type='button' className='google-auth__wrapper'>
       <img className='google-auth__image' src={googleIcon} alt='google icon' />
-      <span className='google-auth__text'>Continue with Google</span>
+      <span className='google-auth__text'>Continuar con Google</span>
     </button>
   );
 };

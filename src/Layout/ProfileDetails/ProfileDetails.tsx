@@ -29,9 +29,9 @@ const ProfileDetails: React.FC = () => {
       ]);
       setLoader(false);
       dispath({ type: 'LOG_IN', payload: auth.currentUser });
-      succsesToast('profile succsesfuly updated', '');
+      succsesToast('Perfil ha sido actualizado exitosamente', '');
     } catch (error) {
-      errorToast('cant update the profile', 'try again and make sure about your network');
+      errorToast('No puedes actualizar tu perfil', 'Intentelo de nuevo y asegure estar conectado a internet');
       setLoader(false);
     }
   };
@@ -43,9 +43,9 @@ const ProfileDetails: React.FC = () => {
 
   return (
     <div className='profile-details'>
-      <h2 className='profile-details__title'>My Details </h2>
+      <h2 className='profile-details__title'>Detalles </h2>
       <div className='profile-details__personal-info'>
-        <h4 className='profile-details__personal-info__title'>personal information</h4>
+        <h4 className='profile-details__personal-info__title'>Información Personal</h4>
         <hr className='profile-details__line' />
         <form onSubmit={handleSubmit} className='profile-details__form'>
           <div className='profile-details__form__inputs'>
@@ -60,7 +60,7 @@ const ProfileDetails: React.FC = () => {
             />
           </div>
           <Button className='profile-details__submit-button' type='submit'>
-            Update
+            Actualizar
           </Button>
         </form>
       </div>

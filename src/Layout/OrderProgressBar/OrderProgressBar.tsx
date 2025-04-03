@@ -9,13 +9,13 @@ const OrderProgressBar: FC = () => {
     <div className='order-progress'>
       <div className='order-progress-line' style={{ width: `${percent}%` }}></div>
       <Link to='/cart' className='order-progress__text order-progress-cart'>
-        Cart
+        Carrito
       </Link>
       <Link to='/checkout' className='order-progress__text order-progress-checkout'>
-        Check out
+        Verificar
       </Link>
       <Link to='' className='order-progress__text order-progress-finish'>
-        Finish
+        Finalizado
       </Link>
     </div>
   );

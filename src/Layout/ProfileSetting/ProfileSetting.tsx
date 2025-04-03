@@ -23,7 +23,7 @@ const ProfileSetting: React.FC = () => {
       setLoader(false);
     } catch (error) {
       setLoader(false);
-      errorToast('cant sign out', 'please try again ');
+      errorToast('No puedes salirte', 'Intentelo de nuevo');
     }
   };
   const handleDeleteAccount = async () => {
@@ -34,27 +34,27 @@ const ProfileSetting: React.FC = () => {
         await deleteUser(auth.currentUser!),
         await signOut(auth),
       ]);
-      succsesToast('account succsesfuly deleted', '');
+      succsesToast('Cuenta eliminada exitosamente', '');
       setLoader(false);
       dispath({ type: 'LOG_OUT' });
       navigate('/');
     } catch (error) {
       setLoader(false);
-      errorToast('cant delete account', 'please try again');
+      errorToast('No puedes borrar la cuenta', 'Intentelo de nuevo');
     }
   };
   return (
     <div className='profile-setting'>
       <div className='profile-setting__head'>
-        <h2 className='profile-setting__title'>Acount setting</h2>
-        <Button onClick={handleLogOut}>Log out</Button>
+        <h2 className='profile-setting__title'>Configuración</h2>
+        <Button onClick={handleLogOut}>Salir</Button>
       </div>
       <hr className='profile-setting__line' />
       <div className='profile-setting__content'>
-        <h4 className='profile-setting__text'>delete your account</h4>
-        <p className='profile-setting__discription'>it will clear all your orders, user log on server </p>
+        <h4 className='profile-setting__text'>Borrar tu cuenta</h4>
+        <p className='profile-setting__discription'>Se borrará todos sus pedidos, registro de usuario en el servidor </p>
         <Button onClick={handleDeleteAccount} className='profile-setting__delete-button'>
-          delete Acount
+          Borrar cuenta
         </Button>
       </div>
     </div>

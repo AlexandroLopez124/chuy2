@@ -11,11 +11,11 @@ const LoginButton: FC<IProps> = ({ className = '' }) => {
   const { isAuth, loading } = useAuth();
   const { state } = useUserContext();
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
   return isAuth ? (
-    <Link title={`Hi ${state.user.displayName}`} to='/profile' className={`header__register-button ${className}`}>
-      <span>profile</span>
+    <Link title={`Hola ${state.user.displayName}`} to='/profile' className={`header__register-button ${className}`}>
+      <span>Perfil</span>
       <BiUser size={24} />
     </Link>
   ) : (

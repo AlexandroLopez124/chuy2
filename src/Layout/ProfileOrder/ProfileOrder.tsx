@@ -30,11 +30,11 @@ const ProfileOrder: React.FC = () => {
   }, []);
   return (
     <div className='order-page'>
-      <h2 className='order-page__title'>My Order</h2>
+      <h2 className='order-page__title'>Mi pedido</h2>
       {loading ? (
         <Loader />
       ) : (
-        orders.length <= 0 && <h2 className='order-page__no-order'>Nothing here, you dont have any order yet</h2>
+        orders.length <= 0 && <h2 className='order-page__no-order'>No hay nada, No tienes ningún pedido aún</h2>
       )}
       <div className='order-page__orders'>
         {orders.map((order: any, i) => (

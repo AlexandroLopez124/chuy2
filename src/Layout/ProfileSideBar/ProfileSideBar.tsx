@@ -16,7 +16,7 @@ const ProfileSideBar: React.FC = () => {
   ];
   return (
     <div className='profile-sidebar'>
-      <h2 className='profile-sidebar__title'>Hi {user.displayName}</h2>
+      <h2 className='profile-sidebar__title'>Hola {user.displayName}</h2>
       <div className='profile-sidebar__links'>
         {linkData.map((link, i) => (
           <Link

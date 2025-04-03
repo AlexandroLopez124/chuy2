@@ -55,16 +55,16 @@ const ShopCart: React.FC = () => {
           {cart.length <= 0 ? (
             <div className='empty-cart'>
               <img src={emptyCartImage} alt='empty cart' className='empty-cart__image' />
-              <p className='empty-cart__text'>Oops! your cart is empty </p>
+              <p className='empty-cart__text'>Oops! Tu carrito esta vacio </p>
             </div>
           ) : (
             cart.map((item: IProducts, i: number) => <ShopCartItem key={i} item={item} />)
           )}
         </div>
         <div className='cart-wrapper__footer'>
-          <h2 className='cart-wrapper__footer__total-price'>Total price : {totalPrice} $</h2>
+          <h2 className='cart-wrapper__footer__total-price'>Precio Total : {totalPrice} $</h2>
           <Button onClick={() => navigate('/cart')} className='cart-wrapper__footer__button'>
-            check out
+            Verificar
           </Button>
         </div>
       </div>
