@@ -11,19 +11,19 @@ const Catagory: FC = () => {
   return (
     <Container>
       <div className='catagory'>
-        <Link className='catagory__link' to='phone'>
+        <Link className='catagory__link' to='CONCACAF'>
           <img className='catagory__image' src={phoneImage} alt="phone's picture" />
           <h4 className='catagory__text'>CONCACAF</h4>
         </Link>
-        <Link className='catagory__link' to='headphone'>
+        <Link className='catagory__link' to='UEFA'>
           <img className='catagory__image' src={consoleImage} alt="phone's picture" />
           <h4 className='catagory__text'>UEFA</h4>
         </Link>
-        <Link className='catagory__link' to='accessories'>
+        <Link className='catagory__link' to='CONMEBOL'>
           <img className='catagory__image' src={accImage} alt="phone's picture" />
           <h4 className='catagory__text'>CONMEBOL</h4>
         </Link>
-        <Link className='catagory__link' to='consols'>
+        <Link className='catagory__link' to='SELECCIONES'>
           <img className='catagory__image' src={headphoneImage} alt="phone's picture" />
           <h4 className='catagory__text'>SELECCIONES</h4>
         </Link>
