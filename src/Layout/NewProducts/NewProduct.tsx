@@ -31,7 +31,6 @@ const NewProduct: React.FC = () => {
       <div className='new-product__head-title'>
         <span className='head-title__notic'>Rapidito que se  terminan</span>
         <h2 className='head-title__main'>Nuevos productos</h2>
-        <p className='head-title__des'>Holi</p>
       </div>
       {loading && <Loader />}
       <div className='new-product__wrapper'>

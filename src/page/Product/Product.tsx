@@ -90,7 +90,7 @@ const Product: React.FC = () => {
         </Link>{' '}
         /{' '}
         <Link className='product-page__path-link' to='/shop'>
-          Shop
+          Tienda
         </Link>{' '}
         / {product.name}
       </div>
@@ -129,11 +129,11 @@ const Product: React.FC = () => {
           <hr className='product-page__line' />
           <form className='product-page__buy-section' onSubmit={handleSubmit}>
             <div className='product-page__buy-section__input'>
-              <h4>Quantity :</h4>
+              <h4>Cantidad :</h4>
               <Input min={1} max={50} onChange={handleChange} value={values.quantity} name='quantity' type='number' />
             </div>
             <Button disabled={!product.inStock || isAddToCart} type='submit'>
-              {isAddToCart ? 'YOU ALREADY ADD THIS' : 'ADD TO CART'}
+              {isAddToCart ? 'YA ESTA EN TU CARRITO' : 'AÑADIR AL CARRITO'}
             </Button>
           </form>
           <p className='product-page__warn-message'>
