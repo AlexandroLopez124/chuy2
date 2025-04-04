@@ -44,7 +44,7 @@ const Shop: FC = () => {
         const snapShot = await getDocs(querySnap);
         snapShot.forEach((doc) => {
           const data = doc.data();
-          allProducts.push(data);
+          allProducts.push({ ...data, id: doc.id });
         });
         const lastVisible = snapShot.docs[snapShot.docs.length - 1];
         setLoading(false);
@@ -65,7 +65,7 @@ const Shop: FC = () => {
       const snapShot = await getDocs(nextProducts);
       snapShot.forEach((doc) => {
         const data = doc.data();
-        productsArray.push(data);
+        productsArray.push({ ...data, id: doc.id });
       });
       const lastVisible = snapShot.docs[snapShot.docs.length - 1];
       setLoadMoreLoading(false);

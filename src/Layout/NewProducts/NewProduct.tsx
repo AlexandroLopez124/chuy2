@@ -19,7 +19,7 @@ const NewProduct: React.FC = () => {
       const snapShot = await getDocs(querySnap);
       snapShot.forEach((doc) => {
         const data = doc.data();
-        allProducts.push(data);
+        allProducts.push({ ...data, id: doc.id });
       });
       setProducts(allProducts);
       setLoading(false);
