@@ -53,10 +53,7 @@ const MobileNav: React.FC = () => {
         <span className='mobile-nav__button-text'>MENU</span>
       </button>
       {/* manu */}
-      <div className={`mobile-nav__menu ${isOpen ? 'open' : ''}`}>
-        <div className='mobile-nav__menu__search-box'>
-          <h4 className='mobile-nav__menu__title'>Ecommerce Shop</h4>
-        </div>
+      <div className={`mobile-nav__menu ${isOpen ? 'open' : ''}`}> 
         <NavLink />
         <Button className='mobile-menu__register-button secoundry'>
           <LoginButton className='mobile-menu__register-link' />
