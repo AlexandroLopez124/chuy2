@@ -26,9 +26,8 @@ const GoogleAuth: FC = () => {
           id: result.user.uid,
           name: result.user.displayName,
           email: result.user.email,
-          phone: '',
-          purchuses: [],
-          favourite: [],
+          purchaces: [],
+          rol: 'user',
         });
       }
       setLoader(false);
