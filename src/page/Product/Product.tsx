@@ -34,13 +34,13 @@ const Product: React.FC = () => {
       window.scroll(0, 0);
       const fethProduct = async () => {
         setProduct(null);
-        const docRef = doc(db, 'products', `${id}`);
+        const docRef = doc(db, 'products', id!);
         const data = await getDoc(docRef);
         if (!data.exists()) {
           navigate('/shop');
           errorToast('Producto no encontrado', 'Asegurese poner correctamente el id del producto en la Url');
         }
-        const productData: any = data.data();
+        const productData: any = { ...data.data(), id: data.id };
         setProduct(productData);
       };
       fethProduct();

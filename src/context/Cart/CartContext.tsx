@@ -29,6 +29,7 @@ const CartContextProvider: React.FC<IProps> = ({ children }) => {
     } else {
       // if allready have count and added to cart, add one to count
       productData.quantity = quantity;
+      if (!productData.id) return;
       const cartData = getStorage('SHOP_CART');
       setStorage('SHOP_CART', [...cartData, productData]);
       dispath({ type: 'ADD_TO_CART', payload: [...products, productData] });

@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './RelatedProduct.css';
 
-import { Pagination } from 'swiper';
+import { Pagination, Navigation } from 'swiper';
 interface IProps {
   catagory: string;
   currentProductId: string;
@@ -23,7 +23,7 @@ const RelatedProduct: FC<IProps> = ({ catagory, currentProductId }) => {
       const quryRef = query(productRef, where('catagory', '==', catagory), limit(12));
       const snapShot = await getDocs(quryRef);
       snapShot.forEach((chunk) => {
-        data.push(chunk.data());
+        data.push({ ...chunk.data(), id: chunk.id });
       });
       const productData: IProducts[] = data.filter((product) => product.id !== currentProductId);
       setRelatedProduct(productData);
@@ -33,11 +33,11 @@ const RelatedProduct: FC<IProps> = ({ catagory, currentProductId }) => {
     <div className='related-product'>
       <Swiper
         pagination={{ clickable: true }}
+        navigation={true}
         slidesPerView={1}
         spaceBetween={0}
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         breakpoints={{ 950: { slidesPerView: 3 }, 650: { slidesPerView: 2 } }}
-        navigation
         lazy
       >
         {relatedProduct.map((product, i) => (
