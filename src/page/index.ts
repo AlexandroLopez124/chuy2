@@ -11,6 +11,7 @@ import NotFound from './NotFound/NotFound';
 import ProductContainer from '../components/ProductsContainer/ProductContainer';
 import Catagory from './Catagory/Catagory';
 import CatagoryPage from './CatagoryPage/CatagoryPage';
+import Admin from './Admin/Admin';
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   ProductContainer,
   Catagory,
   CatagoryPage,
+  Admin,
 };
