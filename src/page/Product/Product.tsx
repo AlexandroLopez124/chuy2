@@ -50,6 +50,11 @@ const Product: React.FC = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    values.quantity = 1;
+  }, [id]);
+  
+
   const { handleChange, handleSubmit, values } = useForm(handleAddToCart, { quantity: 1 });
   if (!product) {
     return (
