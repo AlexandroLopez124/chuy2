@@ -145,13 +145,6 @@ const Product: React.FC = () => {
       <div className='product-page__discription'>
         <h4 className='product-page__discription__title'>Descripción</h4>
         <p className='product-page__discription__text'>{product.description}</p>
-        <ul className='product-page__discription__features'>
-          {product.features.map((feature, i) => (
-            <li key={i} className='product-page__discription__feature'>
-              {feature}
-            </li>
-          ))}
-        </ul>
       </div>
       <hr className='product-page__line' />
       <div className='product-page__sugested-product'>
