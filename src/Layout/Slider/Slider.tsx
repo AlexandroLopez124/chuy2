@@ -38,7 +38,7 @@ const Slider: React.FC = () => {
             <p className='slider-des'>{slider.description}</p>
             <div className='slider-buttons'>
               <Button onClick={() => navigate('/shop')}>Ir a tienda</Button>
-              <Button className='secoundry'>Conocenos</Button>
+              <Button className='secoundry' onClick={() => navigate('/about')}>Conocenos</Button>
             </div>
           </div>
         </SwiperSlide>

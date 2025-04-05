@@ -11,6 +11,7 @@ import ProductSlider from './ProductSlider/ProductSlider';
 import RelatedProduct from './RelatedProduct/RelatedProduct';
 import OrderProgressBar from './OrderProgressBar/OrderProgressBar';
 import Footer from './Footer/Footer';
+import AdminDetails from './AdminDetails copy/AdminDetails';
 export {
   Header,
   Container,
@@ -25,4 +26,5 @@ export {
   RelatedProduct,
   OrderProgressBar,
   Footer,
+  AdminDetails,
 };
