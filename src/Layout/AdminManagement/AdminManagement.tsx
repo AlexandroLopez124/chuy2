@@ -6,9 +6,9 @@ import { useLoader } from '../../context/Loader/LoaderContext';
 import { useUserContext } from '../../context/User/UserContext';
 import useForm from '../../hook/useForm';
 import useToast from '../../hook/useToast';
-import './AdminDetails.css';
+import './AdminManagement.css';
 
-const AdminDetails: React.FC = () => {
+const AdminManagement: React.FC = () => {
   const auth = getAuth();
   const { setLoader } = useLoader();
   const { errorToast, succsesToast } = useToast();
@@ -68,4 +68,4 @@ const AdminDetails: React.FC = () => {
   );
 };
 
-export default AdminDetails;
+export default AdminManagement;

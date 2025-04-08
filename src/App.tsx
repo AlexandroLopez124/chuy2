@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ElevatorButton, LoaderScreen, Toast } from './components';
-import { Header, ProfileDetails, ProfileFavourit, ProfileOrder, ProfileSetting, AdminDetails } from './Layout';
+import { Header, ProfileDetails, ProfileFavourit, ProfileOrder, ProfileSetting, AdminManagement, AdminOrder, AdminPending } from './Layout';
 import Order from './Layout/Order/Order';
 import { About, Catagory, CatagoryPage, Home, NotFound, Product, Profile, Shop, SignIn, Admin } from './page';
 import PrivetRoute from './routes/PrivetRoute';
@@ -35,7 +35,9 @@ const App: React.FC = () => {
               <Route path='setting' element={<ProfileSetting />} />
             </Route>
             <Route path='/admin' element={<Admin />}>
-              <Route path='details' element={<AdminDetails />} />
+              <Route path='management' element={<AdminManagement />} />
+              <Route path='order' element={<AdminOrder />} />
+              <Route path='pending' element={<AdminPending />} />
               
             </Route>
           </Route>

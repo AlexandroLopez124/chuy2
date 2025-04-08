@@ -1,7 +1,7 @@
 import { useUserContext } from '../../context/User/UserContext';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import './Admin.css';
-import { Container, ProfileSideBar } from '../../Layout';
+import { Container, AdminSideBar } from '../../Layout';
 
 const Admin: React.FC = () => {
   const loc = useLocation();
@@ -12,20 +12,17 @@ const Admin: React.FC = () => {
   return (
     <Container className='profile-container'>
       <div className='profile__sidebar'>
-        <ProfileSideBar />
+        <AdminSideBar />
       </div>
       <div className='profile__mobile-navigation'>
-        <Link className={`profile__mobile-navigation__link ${pathname === 'details' ? 'active' : ''}`} to='details'>
-          Detalles del perfil Administrador
-        </Link>
-        <Link className={`profile__mobile-navigation__link ${pathname === 'favourit' ? 'active' : ''}`} to='favourit'>
-          Mis favoritos
+        <Link className={`profile__mobile-navigation__link ${pathname === 'management' ? 'active' : ''}`} to='management'>
+          Gestionar Camisetas
         </Link>
         <Link className={`profile__mobile-navigation__link ${pathname === 'order' ? 'active' : ''}`} to='order'>
-          Mis pedidos
+          Confirmar entregas
         </Link>
-        <Link className={`profile__mobile-navigation__link ${pathname === 'setting' ? 'active' : ''}`} to='setting'>
-          Configuración de la cuenta
+        <Link className={`profile__mobile-navigation__link ${pathname === 'pending' ? 'active' : ''}`} to='pending'>
+          Pedidos Pendientes
         </Link>
       </div>
       <h2 className='profile__mobile__name'>{user.displayName}</h2>
