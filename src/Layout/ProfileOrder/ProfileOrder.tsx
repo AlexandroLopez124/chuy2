@@ -52,7 +52,7 @@ const ProfileOrder: React.FC = () => {
 
   return (
     <div className='order-page'>
-      <h2 className='order-page__title'>Mi pedido</h2>
+      <h2 className='order-page__title'>Mis pedidos</h2>
       {loading ? (
         <Loader />
       ) : (
