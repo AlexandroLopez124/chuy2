@@ -5,6 +5,8 @@ import { db } from '../../config/firebase.config';
 import { useUserContext } from '../../context/User/UserContext';
 import { IProducts } from '../../types/productsType';
 import './ProfileOrder.css';
+// @ts-ignore
+import JsBarcode from 'jsbarcode';
 
 const ProfileOrder: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
@@ -28,6 +30,26 @@ const ProfileOrder: React.FC = () => {
       setLoading(false);
     })();
   }, []);
+
+  // Generar códigos de barras
+  useEffect(() => {
+    if (!loading && orders.length > 0) {
+      orders.forEach((order, index) => {
+        const barcodeId = `barcode-${index}`;
+        const element = document.getElementById(barcodeId);
+        if (element && order.orderId) {
+          JsBarcode(`#${barcodeId}`, order.orderId, {
+            format: 'CODE128',
+            lineColor: '#000',
+            width: 2,
+            height: 40,
+            displayValue: true,
+          });
+        }
+      });
+    }
+  }, [loading, orders]);
+
   return (
     <div className='order-page'>
       <h2 className='order-page__title'>Mi pedido</h2>
@@ -42,6 +64,7 @@ const ProfileOrder: React.FC = () => {
             <div className='order-page__orders__head'>
               <div>
                 <h4 className='order-page__orders__order-id'>{order.orderId}</h4>
+                <svg id={`barcode-${i}`}></svg>
                 <h4 className='order-page__orders__order-date'>{order.timeStamp.toDate().toDateString()}</h4>
               </div>
               <div>
