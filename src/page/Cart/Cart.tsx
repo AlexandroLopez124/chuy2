@@ -70,29 +70,13 @@ const Cart: FC = () => {
       <div className='cart-page'>
         <div className='cart-page__right'>
           <div className='cart-page__right__summery-box'>
-            <h3 className='cart-page__right__summery-box__title'>Resumen</h3>
-            <p className='cart-page__right__summery-box__discription'>
-              Puedes usar <span className='cart-page__test-important'>TEST</span> cupon como prueba cupon para ver el sistema de descuento
-            </p>
+          <h3 className='cart-page__right__summery-box__title'>Resumen</h3>
             <h4 className='cart-page__right__summery-box__order-price'>
               Pedido Total : {(totalProductsPrice - discount).toFixed(2)} $
             </h4>
             <h4 className='cart-page__right__summery-box__discount-status'>
               {copon.percent > 0 ? `${copon.percent}% discount and you save ${discount} $` : ''}
             </h4>
-            <form onSubmit={handleSubmit} className='cart-page__discount-copon'>
-              <Input
-                value={values.copon}
-                name='copon'
-                disabled={copon.text !== ''}
-                onChange={handleChange}
-                className='cart-page__discount-copon__input'
-                placeholder='copon (TEST)'
-              />
-              <Button type='submit' className='secoundry'>
-                {copon.percent > 0 ? 'Clear' : 'Apply'}
-              </Button>
-            </form>
             <Button disabled={cart.length <= 0} onClick={submitToCheckout} className='cart-page__submit'>
               Continuar para verificar
             </Button>

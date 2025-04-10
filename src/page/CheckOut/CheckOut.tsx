@@ -114,6 +114,9 @@ const CheckOutForm: FC = () => {
                   <h5 className="checkout__right__product__price">
                     ${(product.price - (product.price * product.discountPercent) / 100).toFixed(2)}
                   </h5>
+                  <p className="checkout__right__product__size">
+                    Talla: {product.selectedSize}
+                  </p>
                 </div>
                 <h5 className="checkout__right__product__quantity">{product.quantity}</h5>
               </div>
