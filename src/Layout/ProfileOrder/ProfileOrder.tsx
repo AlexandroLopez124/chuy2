@@ -66,6 +66,15 @@ const ProfileOrder: React.FC = () => {
                 <h4 className='order-page__orders__order-id'>{order.orderId}</h4>
                 <svg id={`barcode-${i}`}></svg>
                 <h4 className='order-page__orders__order-date'>{order.timeStamp.toDate().toDateString()}</h4>
+                {order.status !== undefined && (
+                  <span
+                    className={`order-page__orders__status ${
+                      order.status ? 'delivered' : 'pending'
+                    }`}
+                  >
+                    {order.status ? 'Entregado' : 'Pendiente'}
+                  </span>
+                )}
               </div>
               <div>
                 <h4 className='order-page__orders__order-price'>{order.totalPrice} $</h4>
