@@ -33,9 +33,6 @@ const ProductCard: React.FC<Props> = ({ productData }) => {
           src={productData.imageUrls[0]}
           alt={productData.name}
         />
-        <button disabled={!productData.inStock} onClick={handleAddToCart} className='add-to-cart'>
-          <h2>{productData.inStock ? 'Añadir al carrito' : 'Ya no hay'}</h2>
-        </button>
       </div>
       <div className='product-card__content'>
         <h4 className='product-card__name'>{productData.name}</h4>
