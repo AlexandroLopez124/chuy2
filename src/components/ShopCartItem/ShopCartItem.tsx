@@ -32,6 +32,7 @@ const ShopCartItem: React.FC<IProps> = ({ item }) => {
         <Link to={`/product/${item.id}`} className='shop-cart__item__name'>
           {item.name.length >= 30 ? `${item.name.slice(0, 35)} ...` : item.name}
         </Link>
+        <p className='shop-cart__item__size'>Talla: {item.selectedSize}</p>
         <p className='shop-cart__item__price'>{discountPrice} $</p>
       </div>
     </div>

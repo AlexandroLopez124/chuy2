@@ -19,54 +19,68 @@ const CartContextProvider: React.FC<IProps> = ({ children }) => {
 
   const addToCart = (productData: IProducts, quantity: number = 1): void => {
     const { products } = state;
-    // add count to the new product and set it to 1 as default
-    if (products.find((product) => product.id === productData.id)) {
-      const product = products.find((product) => product.id === productData.id);
-      product!.quantity += quantity;
-      const newState = products.filter((newProduct) => newProduct.id !== product?.id);
-      setStorage('SHOP_CART', [...newState, product]);
-      dispath({ type: 'SET_CART', payload: [...newState, product] });
+  
+    // Buscar si ya existe el mismo producto con la misma talla
+    const existingProduct = products.find(
+      (product) => product.id === productData.id && product.selectedSize === productData.selectedSize
+    );
+  
+    if (existingProduct) {
+      // Si ya existe esa talla, aumentar cantidad
+      existingProduct.quantity += quantity;
+  
+      // Reemplazar el producto existente por el actualizado
+      const updatedProducts = products.map((p) =>
+        p.id === existingProduct.id && p.selectedSize === existingProduct.selectedSize ? existingProduct : p
+      );
+  
+      setStorage('SHOP_CART', updatedProducts);
+      dispath({ type: 'SET_CART', payload: updatedProducts });
     } else {
-      // if allready have count and added to cart, add one to count
+      // Si no existe esa combinación, agregarlo como nuevo
       productData.quantity = quantity;
+  
       if (!productData.id) return;
+  
       const cartData = getStorage('SHOP_CART');
-      setStorage('SHOP_CART', [...cartData, productData]);
-      dispath({ type: 'ADD_TO_CART', payload: [...products, productData] });
+      const updatedCart = [...products, productData];
+  
+      setStorage('SHOP_CART', updatedCart);
+      dispath({ type: 'ADD_TO_CART', payload: updatedCart });
     }
   };
 
   const deleteFromCart = (item: IProducts): void => {
-    dispath({ type: 'REMOVE_FROM_CART', payload: item.id });
-    // delete from local storage
-    const cartCopy = { ...state };
-    const filterdCart = cartCopy.products.filter((product) => product.id !== item.id);
-    setStorage('SHOP_CART', filterdCart);
+    const filtered = state.products.filter(
+      (product) => !(product.id === item.id && product.selectedSize === item.selectedSize)
+    );
+    setStorage('SHOP_CART', filtered);
+    dispath({ type: 'SET_CART', payload: filtered });
   };
 
   const increaseQuantity = (item: IProducts): void => {
-    dispath({ type: 'INCRESE_COUNT', payload: item.id });
-    const newProducts = state.products.map((productItem) => {
-      if (productItem.id === item.id) {
-        return { ...productItem, quantity: item.quantity + 1 };
+    const updated = state.products.map((product) => {
+      if (product.id === item.id && product.selectedSize === item.selectedSize) {
+        return { ...product, quantity: product.quantity + 1 };
       }
-      return productItem;
+      return product;
     });
-    setStorage('SHOP_CART', newProducts);
+    setStorage('SHOP_CART', updated);
+    dispath({ type: 'SET_CART', payload: updated });
   };
 
   const decreaseQuantity = (item: IProducts): void => {
-    dispath({ type: 'DECRESE_COUNT', payload: item.id });
-    const newProducts = state.products.map((productItem) => {
-      if (productItem.id === item.id) {
-        return { ...productItem, quantity: item.quantity - 1 };
-      }
-      return productItem;
-    });
-    setStorage('SHOP_CART', newProducts);
-    if (item.quantity <= 1) {
-      deleteFromCart(item);
-    }
+    const updated = state.products
+      .map((product) => {
+        if (product.id === item.id && product.selectedSize === item.selectedSize) {
+          return { ...product, quantity: product.quantity - 1 };
+        }
+        return product;
+      })
+      .filter((product) => product.quantity > 0);
+      
+    setStorage('SHOP_CART', updated);
+    dispath({ type: 'SET_CART', payload: updated });
   };
 
   const clearCart = () => {
