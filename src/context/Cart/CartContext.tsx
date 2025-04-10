@@ -3,6 +3,7 @@ import useLocalStorage from '../../hook/useLocalStorage';
 import { ICart, IProducts } from '../../types/productsType';
 import cartReducer from './CartReducer';
 import coponData from '../../data/copon.json';
+import useToast from '../../hook/useToast';
 
 const initialState: ICart = {
   totalPrice: 0,
@@ -16,6 +17,8 @@ interface IProps {
 const CartContextProvider: React.FC<IProps> = ({ children }) => {
   const [state, dispath] = useReducer<Reducer<ICart, any>>(cartReducer, initialState);
   const { getStorage, setStorage } = useLocalStorage();
+  const { errorToast } = useToast(); // ✅ Hook correcto aquí
+
 
   const addToCart = (productData: IProducts, quantity: number = 1): void => {
     const { products } = state;
@@ -59,15 +62,31 @@ const CartContextProvider: React.FC<IProps> = ({ children }) => {
   };
 
   const increaseQuantity = (item: IProducts): void => {
+    const currentItem = state.products.find(
+      (product) => product.id === item.id && product.selectedSize === item.selectedSize
+    );
+
+    if (!currentItem) return;
+
+    if (currentItem.quantity >= 50) {
+      errorToast(
+        'Límite alcanzado',
+        'No se pueden añadir más de 50 unidades por talla en el carrito.'
+      );
+      return;
+    }
+
     const updated = state.products.map((product) => {
       if (product.id === item.id && product.selectedSize === item.selectedSize) {
         return { ...product, quantity: product.quantity + 1 };
       }
       return product;
     });
+
     setStorage('SHOP_CART', updated);
     dispath({ type: 'SET_CART', payload: updated });
   };
+  
 
   const decreaseQuantity = (item: IProducts): void => {
     const updated = state.products
