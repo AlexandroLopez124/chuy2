@@ -14,18 +14,26 @@ import { useCartContext } from '../../context/Cart/CartContext';
 
 const Product: React.FC = () => {
   const RelatedProduct = useMemo(() => lazy(() => import('../../Layout/RelatedProduct/RelatedProduct')), []);
-
   const { id } = useParams<string>();
   const navigate = useNavigate();
   const { addToCart, cart } = useCartContext();
   const [product, setProduct] = useState<IProducts | null>(null);
   const { errorToast } = useToast();
+  const [selectedSize, setSelectedSize] = useState<string>('');
 
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      errorToast('Seleccione una talla', 'Debe elegir una talla antes de añadir al carrito');
+      return;
+    }
+
     if (+values.quantity >= 1 && product?.inStock) {
-      addToCart(product!, +values.quantity);
+      addToCart({ ...product!, selectedSize }, +values.quantity);
     } else {
-      errorToast('No se puede añadir productos en el carrito', 'asegúrese de poner el número en la entrada de cantidad');
+      errorToast(
+        'No se puede añadir productos en el carrito',
+        'asegúrese de poner el número en la entrada de cantidad'
+      );
     }
   };
 
@@ -52,10 +60,11 @@ const Product: React.FC = () => {
 
   useEffect(() => {
     values.quantity = 1;
+    setSelectedSize('');
   }, [id]);
-  
 
   const { handleChange, handleSubmit, values } = useForm(handleAddToCart, { quantity: 1 });
+
   if (!product) {
     return (
       <Container>
@@ -85,19 +94,15 @@ const Product: React.FC = () => {
       </Container>
     );
   }
+
   const discountPrice = (product!.price - (product!.price * product!.discountPercent) / 100).toFixed(2);
   const isAddToCart = cart.find((item) => item.id === product.id) ? true : false;
+
   return (
     <Container>
       <div className='product-page__path'>
-        <Link className='product-page__path-link' to='/'>
-          Inicio
-        </Link>{' '}
-        /{' '}
-        <Link className='product-page__path-link' to='/shop'>
-          Tienda
-        </Link>{' '}
-        / {product.name}
+        <Link className='product-page__path-link' to='/'>Inicio</Link> /{' '}
+        <Link className='product-page__path-link' to='/shop'>Tienda</Link> / {product.name}
       </div>
       <div className='product-page'>
         <div className='product-page__image'>
@@ -108,7 +113,6 @@ const Product: React.FC = () => {
           <span className='product-page__content__date'>
             {new Timestamp(product.timeStamp.seconds, product.timeStamp.nanoseconds).toDate().toDateString()}
           </span>
-
           <div className='product-page__content__prices'>
             {product.discountPercent > 0 && (
               <del className='product-page__content__non-discount-price'>$ {product.price}</del>
@@ -132,15 +136,33 @@ const Product: React.FC = () => {
             <h4 className='product-page__status-text'>Importado desde México</h4>
           </div>
           <hr className='product-page__line' />
+
           <form className='product-page__buy-section' onSubmit={handleSubmit}>
             <div className='product-page__buy-section__input'>
               <h4>Cantidad :</h4>
               <Input min={1} max={50} onChange={handleChange} value={values.quantity} name='quantity' type='number' />
             </div>
+
+            <div className='product-page__buy-section__input'>
+              <h4>Talla :</h4>
+              <select
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className='product-page__select-size' 
+              >
+                <option value=''>Selecciona una talla</option>
+                <option value='S'>S</option>
+                <option value='M'>M</option>
+                <option value='L'>L</option>
+                <option value='XL'>XL</option>
+              </select>
+            </div>
+
             <Button disabled={!product.inStock || isAddToCart} type='submit'>
               {isAddToCart ? 'YA ESTA EN TU CARRITO' : 'AÑADIR AL CARRITO'}
             </Button>
           </form>
+
           <p className='product-page__warn-message'>
             Nota: Esta camisa es exclusiva de esta confederación, asegure que es la que quiere....
           </p>

@@ -10,6 +10,7 @@ export interface IProducts {
   imageUrls: string[];
   inStock: boolean;
   quantity: number;
+  selectedSize: string;
 }
 interface ICart {
   totalPrice: number;
