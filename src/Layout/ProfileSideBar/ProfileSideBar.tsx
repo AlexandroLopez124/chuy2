@@ -9,10 +9,9 @@ const ProfileSideBar: React.FC = () => {
   } = useUserContext();
 
   const linkData = [
-    { to: 'details', text: 'My details', icon: <AiOutlineUser /> },
-    { to: 'favourit', text: 'My favourit', icon: <AiOutlineHeart /> },
-    { to: 'order', text: 'My order', icon: <AiOutlineShopping /> },
-    { to: 'setting', text: 'Acount setting', icon: <AiOutlineSetting /> },
+    { to: 'details', text: 'Detalles', icon: <AiOutlineUser /> },
+    { to: 'order', text: 'Mis Pedidos', icon: <AiOutlineShopping /> },
+    { to: 'setting', text: 'Configuracion', icon: <AiOutlineSetting /> },
   ];
   return (
     <div className='profile-sidebar'>

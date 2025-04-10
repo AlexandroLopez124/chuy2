@@ -63,3 +63,22 @@
   font-size: 1.5rem;
   margin-top: 2rem;
 }
+
+.order-page__orders__status {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.order-page__orders__status.delivered {
+  background-color: #28a745; /* Verde para entregado */
+}
+
+.order-page__orders__status.pending {
+  background-color: #ffc107; /* Amarillo para pendiente */
+  color: #333;
+}

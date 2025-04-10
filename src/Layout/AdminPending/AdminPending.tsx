@@ -1,64 +1,79 @@
-import { getAuth, signOut, deleteUser } from 'firebase/auth';
-import { deleteDoc, doc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase.config';
-import { useLoader } from '../../context/Loader/LoaderContext';
-import { useUserContext } from '../../context/User/UserContext';
-import useToast from '../../hook/useToast';
-import './AdminPending.css';
+import { Loader } from '../../components';
+import { IProducts } from '../../types/productsType';
+// @ts-ignore
 
-const AdminPending: React.FC = () => {
-  const { dispath } = useUserContext();
-  const { setLoader } = useLoader();
-  const auth = getAuth();
-  const { errorToast, succsesToast } = useToast();
-  const navigate = useNavigate();
-  const handleLogOut = async () => {
-    try {
-      setLoader(true);
-      await signOut(auth);
-      dispath({ type: 'LOG_OUT' });
-      navigate('/');
-      setLoader(false);
-    } catch (error) {
-      setLoader(false);
-      errorToast('No puedes salirte', 'Intentelo de nuevo');
+const AdminPendingOrders: React.FC = () => {
+  const [pendingOrders, setPendingOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    (async () => {
+      const orders: any[] = [];
+      const pendingQuery = query(
+        collection(db, 'purchuses'),
+        where('status', '==', false) // Solo compras pendientes
+      );
+      const snapshot = await getDocs(pendingQuery);
+      snapshot.forEach((doc) => {
+        orders.push(doc.data());
+      });
+      setPendingOrders(orders);
+      setLoading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (!loading && pendingOrders.length > 0) {
+      pendingOrders.forEach((order, index) => {
+        const barcodeId = `admin-barcode-${index}`;
+        const element = document.getElementById(barcodeId);
+      });
     }
-  };
-  const handleDeleteAccount = async () => {
-    try {
-      setLoader(true);
-      await Promise.all([
-        await deleteDoc(doc(db, 'users', auth.currentUser!.uid)),
-        await deleteUser(auth.currentUser!),
-        await signOut(auth),
-      ]);
-      succsesToast('Cuenta eliminada exitosamente', '');
-      setLoader(false);
-      dispath({ type: 'LOG_OUT' });
-      navigate('/');
-    } catch (error) {
-      setLoader(false);
-      errorToast('No puedes borrar la cuenta', 'Intentelo de nuevo');
-    }
-  };
+  }, [loading, pendingOrders]);
+
   return (
-    <div className='profile-setting'>
-      <div className='profile-setting__head'>
-        <h2 className='profile-setting__title'>Configuración</h2>
-        <Button onClick={handleLogOut}>Salir</Button>
-      </div>
-      <hr className='profile-setting__line' />
-      <div className='profile-setting__content'>
-        <h4 className='profile-setting__text'>Borrar tu cuenta</h4>
-        <p className='profile-setting__discription'>Se borrará todos sus pedidos, registro de usuario en el servidor </p>
-        <Button onClick={handleDeleteAccount} className='profile-setting__delete-button'>
-          Borrar cuenta
-        </Button>
-      </div>
+    <div className='admin-order-page'>
+      <h2 className='admin-order-page__title'>Compras Pendientes</h2>
+      {loading ? (
+        <Loader />
+      ) : (
+        pendingOrders.length === 0 ? (
+          <p className='admin-order-page__no-orders'>No hay compras pendientes.</p>
+        ) : (
+          <div className='admin-order-page__orders'>
+            {pendingOrders.map((order: any, i) => (
+              <div key={i} className='admin-order-page__order'>
+                <div className='admin-order-page__header'>
+                  <div>
+                    <h4>ID: {order.orderId}</h4>
+                    <p>Fecha: {order.timeStamp.toDate().toDateString()}</p>
+                  </div>
+                  <div>
+                    <p>Total: {order.totalPrice} $</p>
+                    <span className='status-tag pending'>Pendiente</span>
+                  </div>
+                </div>
+                <div className='admin-order-page__products'>
+                  {order.products.map((product: IProducts, i: number) => (
+                    <img
+                      key={i}
+                      src={product.imageUrls[0]}
+                      alt={product.name}
+                      className='admin-order-page__product-img'
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
 };
 
-export default AdminPending;
+export default AdminPendingOrders;
