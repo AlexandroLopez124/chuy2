@@ -4,7 +4,7 @@ import { db, storage } from '../../config/firebase.config';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { IProducts } from '../../types/productsType';
 import './AdminManagement.css';
-
+import { serverTimestamp } from "firebase/firestore";
 const ProductManagement: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const ProductManagement: FC = () => {
     inStock: true,
     quantity: 0,
     selectedSize: 'M',
-    imageUrls: []
+    imageUrls: [""]
   });
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isAddingNew, setIsAddingNew] = useState(false);
@@ -75,7 +75,7 @@ const ProductManagement: FC = () => {
     try {
       const productRef = doc(db, 'products', editingProduct.id);
       const { id, timeStamp, ...productData } = editingProduct;
-      await updateDoc(productRef, productData as any);
+await updateDoc(productRef, productData as any);
       
       setProducts(products.map(p => p.id === editingProduct.id ? editingProduct : p));
       setEditingProduct(null);
@@ -121,41 +121,37 @@ const ProductManagement: FC = () => {
     });
   };
 
-  // Manejar subida de imágenes
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImageFiles(Array.from(e.target.files));
-    }
-  };
-
-  // Crear nuevo producto
   const handleCreateProduct = async () => {
     try {
-      // Subir imágenes a Storage
-      const uploadedImageUrls = [];
-      for (const file of imageFiles) {
-        const storageRef = ref(storage, `products/${file.name}`);
-        await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(storageRef);
-        uploadedImageUrls.push(downloadURL);
+      // Filtrar las URLs válidas (no vacías)
+      const validImageUrls = newProduct.imageUrls?.filter(url => url.trim() !== '') || [];
+      
+      if (validImageUrls.length === 0) {
+        alert('Debes proporcionar al menos una imagen URL');
+        return;
       }
-
-      // Crear documento en Firestore
+  
+      // Crear documento en Firestore con el timestamp del servidor
       const productData = {
         ...newProduct,
-        imageUrls: uploadedImageUrls,
-        timeStamp: new Date()
+        imageUrls: validImageUrls,
+        timeStamp: {   // <-- Aquí está la corrección
+          seconds: Math.floor(Date.now() / 1000),
+          nanoseconds: 0
+        }
       };
-
+  
       const docRef = await addDoc(collection(db, 'products'), productData);
-      const now = new Date();
-const timeStamp = {
-  seconds: Math.floor(now.getTime() / 1000),
-  nanoseconds: (now.getTime() % 1000) * 1e6,
-};
-
+      
       // Actualizar lista de productos
-      setProducts([...products, { ...productData, id: docRef.id, timeStamp } as IProducts]);
+      setProducts([...products, { 
+        ...productData, 
+        id: docRef.id,
+        timeStamp: {   // <-- También aquí para consistencia
+          seconds: Math.floor(Date.now() / 1000),
+          nanoseconds: 0
+        }
+      } as IProducts]);
       
       // Resetear formulario
       setNewProduct({
@@ -168,9 +164,8 @@ const timeStamp = {
         inStock: true,
         quantity: 0,
         selectedSize: 'M',
-        imageUrls: []
+        imageUrls: ['', '']
       });
-      setImageFiles([]);
       setIsAddingNew(false);
     } catch (error) {
       console.error("Error creating product: ", error);
@@ -288,13 +283,25 @@ const timeStamp = {
             </select>
           </div>
           <div className="form-group">
-            <label>Imágenes:</label>
-            <input 
-              type="file" 
-              multiple 
-              onChange={handleImageUpload} 
-            />
-          </div>
+  <label>URL de Imágenes:</label>
+  {newProduct.imageUrls?.map((url, index) => (
+    <input
+      key={index}
+      type="text"
+      placeholder={`URL de la imagen ${index + 1}`}
+      value={url}
+      onChange={(e) => {
+        const updatedUrls = [...(newProduct.imageUrls || [])];
+        updatedUrls[index] = e.target.value;
+        setNewProduct({
+          ...newProduct,
+          imageUrls: updatedUrls
+        });
+      }}
+    />
+  ))}
+  <small>Puedes agregar hasta 2 URLs de imágenes</small>
+</div>
           <div className="form-actions">
             <button onClick={handleCreateProduct}>Guardar</button>
             <button onClick={() => setIsAddingNew(false)}>Cancelar</button>
