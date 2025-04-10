@@ -62,6 +62,10 @@ const Product: React.FC = () => {
     values.quantity = 1;
     setSelectedSize('');
   }, [id]);
+  
+  useEffect(() => {
+    values.quantity = 1;
+  }, [selectedSize]);
 
   const { handleChange, handleSubmit, values } = useForm(handleAddToCart, { quantity: 1 });
 
@@ -96,7 +100,8 @@ const Product: React.FC = () => {
   }
 
   const discountPrice = (product!.price - (product!.price * product!.discountPercent) / 100).toFixed(2);
-  const isAddToCart = cart.find((item) => item.id === product.id) ? true : false;
+  const isAddToCart = cart.some((item) => item.id === product.id && item.selectedSize === selectedSize);
+
 
   return (
     <Container>
