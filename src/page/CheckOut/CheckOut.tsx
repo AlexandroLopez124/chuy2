@@ -66,6 +66,7 @@ const CheckOutForm: FC = () => {
         timeStamp: Timestamp.now(),
         userRef: doc(db, 'users', user.uid),
         paymentIntentId: paymentIntent.id,
+        status: false,  // Agregamos el campo status como booleano y lo establecemos en false
       });
   
       // 4. Limpiar el carrito y redirigir

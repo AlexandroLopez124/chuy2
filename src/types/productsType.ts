@@ -11,6 +11,7 @@ export interface IProducts {
   inStock: boolean;
   quantity: number;
   selectedSize: string;
+  status: boolean;
 }
 interface ICart {
   totalPrice: number;
