@@ -58,15 +58,13 @@ const AdminPendingOrders: React.FC = () => {
                   </div>
                 </div>
                 <div className='admin-order-page__products'>
-                  {order.products.map((product: IProducts, i: number) => (
-                    <img
-                      key={i}
-                      src={product.imageUrls[0]}
-                      alt={product.name}
-                      className='admin-order-page__product-img'
-                    />
-                  ))}
-                </div>
+  {order.products.map((product: IProducts, i: number) => (
+    <div key={i} className='admin-order-page__product'>
+      <p className='admin-order-page__product-name'>{product.name}</p>
+    </div>
+  ))}
+</div>
+
               </div>
             ))}
           </div>
