@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase.config';
 import { Loader } from '../../components';
 import { IProducts } from '../../types/productsType';
-// @ts-ignore
 
 const AdminPendingOrders: React.FC = () => {
   const [pendingOrders, setPendingOrders] = useState<any[]>([]);
@@ -58,13 +57,14 @@ const AdminPendingOrders: React.FC = () => {
                   </div>
                 </div>
                 <div className='admin-order-page__products'>
-  {order.products.map((product: IProducts, i: number) => (
-    <div key={i} className='admin-order-page__product'>
-      <p className='admin-order-page__product-name'>{product.name}</p>
-    </div>
-  ))}
-</div>
-
+                  {order.products.map((product: IProducts, i: number) => (
+                    <div key={i} className='admin-order-page__product'>
+                      <p className='admin-order-page__product-name'>
+                        {product.name} - Talla: {product.selectedSize || 'N/A'} - Unidades: {product.quantity}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -75,3 +75,4 @@ const AdminPendingOrders: React.FC = () => {
 };
 
 export default AdminPendingOrders;
+
