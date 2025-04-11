@@ -98,14 +98,6 @@ const ProfileSetting: React.FC = () => {
   <h4 className='profile-setting__logout-text'>Salir de la tienda</h4>
         <Button onClick={() => setShowConfirmLogout(true)} >Salir</Button>
         </div>
-      <hr className='profile-setting__line' />
-      <div className='profile-setting__content'>
-        <h4 className='profile-setting__text'>Borrar tu cuenta</h4>
-        <p className='profile-setting__discription'>Se borrará todos sus pedidos, registro de usuario en el servidor </p>
-        <Button onClick={() => setShowConfirmDelete(true)} className='profile-setting__delete-button'>
-          Borrar cuenta
-        </Button>
-      </div>
     </div>
   );
 };
