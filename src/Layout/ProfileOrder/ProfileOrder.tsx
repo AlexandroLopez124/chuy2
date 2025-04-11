@@ -25,7 +25,7 @@ const ProfileOrder: React.FC = () => {
       const querySnapShot = await getDocs(purchusesQueryRef);
       querySnapShot.forEach((chunk) => {
         const orderData = chunk.data();
-        console.log('Order Status from Firestore:', orderData.status); // Verificar el valor de status
+        console.log('Order Status from Firestore:', orderData.status);
         ordersData.push(orderData);
       });
       setOrders(ordersData);
@@ -33,7 +33,6 @@ const ProfileOrder: React.FC = () => {
     })();
   }, []);
 
-  // Generar códigos de barras
   useEffect(() => {
     if (!loading && orders.length > 0) {
       orders.forEach((order, index) => {
@@ -52,7 +51,6 @@ const ProfileOrder: React.FC = () => {
     }
   }, [loading, orders]);
 
-  // Función para manejar los valores de estado de los pedidos
   const getOrderStatus = (status: any) => {
     if (status === 'true' || status === true) {
       return 'delivered';
@@ -98,7 +96,7 @@ const ProfileOrder: React.FC = () => {
                 </span>
               </div>
               <div>
-                <h4 className='order-page__orders__order-price'>{order.totalPrice} $</h4>
+                <h4 className='order-page__orders__order-price'>${parseFloat(order.totalPrice).toFixed(2)}</h4>
               </div>
             </div>
 
@@ -132,4 +130,3 @@ const ProfileOrder: React.FC = () => {
 };
 
 export default ProfileOrder;
-
