@@ -1,36 +1,86 @@
-.profile-setting__title {
-  font-size: 2rem;
-  font-weight: 500;
-}
-.profile-setting__text {
-  font-size: 1.8rem;
-  font-weight: 400;
-}
-.profile-setting__discription {
-  font-size: 1.4rem;
-  font-weight: 300;
-}
-.profile-setting__content {
-  margin-top: 2rem;
-}
-.profile-setting__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.profile-setting__line {
-  border: none;
-  background-color: rgb(204, 204, 204);
-  width: 100%;
-  height: 0.1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.admin-order-page {
+  padding: 2rem;
 }
 
-.profile-setting__delete-button {
-  margin-top: 1rem;
-  background-color: rgb(214, 33, 33);
+.admin-order-page__title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
 }
-.profile-setting__delete-button:hover {
-  background-color: rgb(187, 29, 29);
+
+.admin-order-page__no-orders {
+  font-size: 1.8rem;
+  color: #999;
+}
+
+.admin-order-page__orders {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-order {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-order__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-order__info h4,
+.admin-order__info p {
+  margin: 0;
+  color: #444;
+}
+
+.admin-order__id {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #222;
+}
+
+.admin-order__date {
+  font-size: 1.4rem;
+  color: #666;
+}
+
+.admin-order__status {
+  text-align: right;
+}
+
+.admin-order__total {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.admin-order__tag.pending {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  background-color: #ffcc00;
+  color: #333;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.admin-order__products {
+  gap: 0.5rem;
+}
+
+.admin-order__product-name {
+  font-size: 1.4rem;
+  color: #555;
 }

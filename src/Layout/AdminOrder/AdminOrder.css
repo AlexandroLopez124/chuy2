@@ -1,71 +1,169 @@
-.order-page__orders {
-  margin-top: 2rem;
-  gap: 2rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.order-page__orders__order {
-  position: relative;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.096);
+.admin-order2 {
   padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+}
+
+.admin-order__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.admin-order__search {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-order__search input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.admin-order__search button {
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  background-color: #040a40;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-order__search button:hover {
+  background-color: #111b74;
+}
+
+.admin-order__loading {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+.admin-order__result {
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.admin-order__subtitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  
+}
+
+.admin-order__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-order__product {
+  width: 140px;
+  text-align: center;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 3px 4px 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.admin-order__product img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
   border-radius: 0.5rem;
 }
-.order-page__orders__head {
-  display: flex;
-  justify-content: space-between;
-}
-.order-page__orders__order-date {
-  font-size: 1.4rem;
-  font-weight: 300;
-}
-.order-page__orders__order-id {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-.order-page__orders__length {
-  font-size: 1.5rem;
-  font-weight: 400;
-}
-.order-page__orders__order-price {
-  font-size: 1.4rem;
-  font-weight: 400;
-}
-.order-page__orders__order-img {
-  width: 5rem;
-  height: 5rem;
-  object-fit: cover;
-}
-.order-page__orders__order-products {
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-.order-page__orders-button {
-  border-radius: 50%;
-  position: absolute;
-  width: 4rem;
-  height: 4rem;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 2rem;
-  right: 2rem;
-}
-.order-page__title {
-  font-size: 2rem;
-  font-weight: 500;
-}
-.order-page__no-order {
-  font-weight: 300;
-  font-size: 1.5rem;
+
+.admin-order__button-wrapper {
   margin-top: 2rem;
 }
 
+.admin-order__confirm {
+  padding: 0.75rem 1.5rem;
+  background-color: #40916c;
+  color: white;
+  font-weight: 500;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.admin-order__confirm:hover {
+  background-color: #2d6a4f;
+}
+
+.admin-order__no-result {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #a4161a;
+}
+
 @media screen and (max-width: 600px) {
-  .order-result__button-wrapper {
-    justify-content: center !important;
+  .admin-order__search {
+    flex-direction: column;
   }
+
+  .admin-order__product {
+    width: 100%;
+  }
+
+  .admin-order__button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+.order-info-p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+}
+
+.admin-order__confirmation {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.admin-order__confirmation-confirm,
+.admin-order__confirmation-cancel {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.admin-order__confirmation-confirm {
+  background-color: #40916c;
+  color: white;
+}
+
+.admin-order__confirmation-cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+.admin-order__confirmation-confirm:hover {
+  background-color: #218838;
+}
+
+.admin-order__confirmation-cancel:hover {
+  background-color: #c82333;
+}
+.admin-order__confirmation-p {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
