@@ -1,8 +1,11 @@
 .footer {
-  margin-top: 2rem;
-  background-color: rgb(238, 238, 238);
+  margin-top: auto;
+  padding: 2rem 0;
+  background-color: #f4f4f4;
   text-align: center;
+  width: 100%;
 }
+
 .footer__content {
   padding: 4rem;
 }

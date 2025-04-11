@@ -1,7 +1,9 @@
 .shop {
-  width: 100%;
-  min-height: calc(100vh - 31.6rem);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
 .shop__head {
   display: flex;
   justify-content: space-between;
