@@ -19,18 +19,12 @@
   font-size: 1.4rem;
   font-weight: 300;
 }
-.order-page__orders__order-id {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
+
 .order-page__orders__length {
   font-size: 1.5rem;
   font-weight: 400;
 }
-.order-page__orders__order-price {
-  font-size: 1.4rem;
-  font-weight: 400;
-}
+
 .order-page__orders__order-img {
   width: 5rem;
   height: 5rem;
@@ -41,6 +35,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap
 }
 .order-page__orders-button {
   border-radius: 50%;
@@ -81,4 +76,28 @@
 .order-page__orders__status.pending {
   background-color: #ffc107; /* Amarillo para pendiente */
   color: #333;
+}
+
+@media screen and (max-width: 600px) {
+  .order-page__orders__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .order-page__orders__order-id {
+    font-size: 1.3rem;
+    word-break: break-word;
+  }
+
+  .order-page__orders__order-price {
+    font-size: 1.3rem;
+    align-self: flex-start;
+  }
+
+
+
+  svg[id^="barcode-"] {
+    max-width: 100%;
+  }
 }
