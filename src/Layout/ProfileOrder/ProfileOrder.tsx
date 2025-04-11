@@ -54,35 +54,28 @@ const ProfileOrder: React.FC = () => {
 
   // Función para manejar los valores de estado de los pedidos
   const getOrderStatus = (status: any) => {
-    // Si el status es una cadena, convertirlo a un booleano
     if (status === 'true' || status === true) {
       return 'delivered';
     } else if (status === 'false' || status === false) {
       return 'pending';
     } else {
-      console.error('Status inválido:', status); // Verificar si llega algún valor inesperado
-      return 'pending'; // Si el valor no es válido, consideramos que está pendiente
+      console.error('Status inválido:', status);
+      return 'pending';
     }
   };
 
-  // Función para actualizar los status de todos los pedidos en Firestore a booleanos
   const updateStatusesToBoolean = async () => {
     const ordersQuery = query(collection(db, 'purchuses'));
     const querySnapShot = await getDocs(ordersQuery);
     querySnapShot.forEach(async (docSnap) => {
       const order = docSnap.data();
       if (typeof order.status === 'string') {
-        const statusBoolean = order.status === 'true'; // Convertir a booleano
+        const statusBoolean = order.status === 'true';
         await updateDoc(docSnap.ref, { status: statusBoolean });
         console.log(`Updated order ${docSnap.id} status to ${statusBoolean}`);
       }
     });
   };
-
-  // Llamada a la función para actualizar los status si es necesario (descomentar para ejecutar)
-  // useEffect(() => {
-  //   updateStatusesToBoolean();
-  // }, []);
 
   return (
     <div className='order-page'>
@@ -100,11 +93,7 @@ const ProfileOrder: React.FC = () => {
                 <h4 className='order-page__orders__order-id'>{order.orderId}</h4>
                 <svg id={`barcode-${i}`}></svg>
                 <h4 className='order-page__orders__order-date'>{order.timeStamp.toDate().toDateString()}</h4>
-
-                {/* MOSTRAR STATUS */}
-                <span
-                  className={`order-page__orders__status ${getOrderStatus(order.status)}`}
-                >
+                <span className={`order-page__orders__status ${getOrderStatus(order.status)}`}>
                   {getOrderStatus(order.status) === 'delivered' ? 'Entregado' : 'Pendiente'}
                 </span>
               </div>
@@ -128,9 +117,11 @@ const ProfileOrder: React.FC = () => {
                       <img className='order-page__orders__order-img' src={product.imageUrls[0]} alt={product.name} />
                     </div>
                   ))}
-              <span className='order-page__orders__length'>
-                {order.products.length >= 4 && `+ ${order.products.length - 4}`}
-              </span>
+              {order.products.length > 4 && (
+                <span className='order-page__orders__length'>
+                  + {order.products.length - 4}
+                </span>
+              )}
             </div>
             <Button className='secoundry order-page__orders-button'>{'>'}</Button>
           </div>
@@ -141,3 +132,4 @@ const ProfileOrder: React.FC = () => {
 };
 
 export default ProfileOrder;
+
