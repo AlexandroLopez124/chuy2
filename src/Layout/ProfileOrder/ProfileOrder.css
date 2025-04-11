@@ -24,7 +24,10 @@
   font-size: 1.5rem;
   font-weight: 400;
 }
-
+.order-page__orders__order-price {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
 .order-page__orders__order-img {
   width: 5rem;
   height: 5rem;
@@ -35,7 +38,6 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  flex-wrap: wrap
 }
 .order-page__orders-button {
   border-radius: 50%;
@@ -95,7 +97,9 @@
     align-self: flex-start;
   }
 
-
+  .order-page__orders__order-products {
+    flex-wrap: wrap;
+  }
 
   svg[id^="barcode-"] {
     max-width: 100%;
