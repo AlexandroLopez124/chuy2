@@ -11,6 +11,7 @@ import JsBarcode from 'jsbarcode';
 const ProfileOrder: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const {
     state: { user },
@@ -25,7 +26,6 @@ const ProfileOrder: React.FC = () => {
       const querySnapShot = await getDocs(purchusesQueryRef);
       querySnapShot.forEach((chunk) => {
         const orderData = chunk.data();
-        console.log('Order Status from Firestore:', orderData.status);
         ordersData.push(orderData);
       });
       setOrders(ordersData);
@@ -62,19 +62,6 @@ const ProfileOrder: React.FC = () => {
     }
   };
 
-  const updateStatusesToBoolean = async () => {
-    const ordersQuery = query(collection(db, 'purchuses'));
-    const querySnapShot = await getDocs(ordersQuery);
-    querySnapShot.forEach(async (docSnap) => {
-      const order = docSnap.data();
-      if (typeof order.status === 'string') {
-        const statusBoolean = order.status === 'true';
-        await updateDoc(docSnap.ref, { status: statusBoolean });
-        console.log(`Updated order ${docSnap.id} status to ${statusBoolean}`);
-      }
-    });
-  };
-
   return (
     <div className='order-page'>
       <h2 className='order-page__title'>Mis pedidos</h2>
@@ -100,28 +87,45 @@ const ProfileOrder: React.FC = () => {
               </div>
             </div>
 
-            <div className='order-page__orders__order-products'>
-              {order.products.length <= 4
-                ? order.products.map((product: IProducts, i: number) => (
+            <div style={{ marginTop: '2rem' }}>
+              {expandedIndex === i ? (
+                <div className='order-page__orders__expanded order-page__orders__expanded--spaced'>
+                  {order.products.map((product: IProducts, j: number) => (
+                    <div key={j} className='order-page__orders__expanded-item'>
+                      <img
+                        className='order-page__orders__order-img'
+                        src={product.imageUrls[0]}
+                        alt={product.name}
+                      />
+                      <p>
+                        {product.name} - Talla: {product.selectedSize || 'N/A'} - Unidades: {product.quantity}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className='order-page__orders__order-products'>
+                  {order.products.slice(0, 4).map((product: IProducts, j: number) => (
                     <img
-                      key={i}
+                      key={j}
                       className='order-page__orders__order-img'
                       src={product.imageUrls[0]}
                       alt={product.name}
                     />
-                  ))
-                : [...order.products].splice(0, 4).map((product: IProducts, i: number) => (
-                    <div key={i}>
-                      <img className='order-page__orders__order-img' src={product.imageUrls[0]} alt={product.name} />
-                    </div>
                   ))}
-              {order.products.length > 4 && (
-                <span className='order-page__orders__length'>
-                  + {order.products.length - 4}
-                </span>
+                  {order.products.length > 4 && (
+                    <span className='order-page__orders__length'>+ {order.products.length - 4}</span>
+                  )}
+                </div>
               )}
             </div>
-            <Button className='secoundry order-page__orders-button'>{'>'}</Button>
+
+            <Button
+              className='secoundry order-page__orders-button'
+              onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
+            >
+              {'>'}
+            </Button>
           </div>
         ))}
       </div>

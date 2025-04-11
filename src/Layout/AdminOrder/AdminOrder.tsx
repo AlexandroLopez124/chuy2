@@ -106,9 +106,7 @@ const AdminOrder: React.FC = () => {
         </div>
       )}
 
-      {!loading && searchId && !foundOrder && (
-        <p className='admin-order__no-result'>No se encontró ninguna orden con ese ID.</p>
-        )}
+
     </div>
   );
 };
