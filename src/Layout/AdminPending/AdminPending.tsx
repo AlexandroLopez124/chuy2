@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase.config';
 import { Loader } from '../../components';
 import { IProducts } from '../../types/productsType';
+import './AdminPending.css';
 
 const AdminPendingOrders: React.FC = () => {
   const [pendingOrders, setPendingOrders] = useState<any[]>([]);
@@ -37,6 +38,7 @@ const AdminPendingOrders: React.FC = () => {
   return (
     <div className='admin-order-page'>
       <h2 className='admin-order-page__title'>Compras Pendientes</h2>
+      
       {loading ? (
         <Loader />
       ) : (
@@ -45,21 +47,21 @@ const AdminPendingOrders: React.FC = () => {
         ) : (
           <div className='admin-order-page__orders'>
             {pendingOrders.map((order: any, i) => (
-              <div key={i} className='admin-order-page__order'>
-                <div className='admin-order-page__header'>
-                  <div>
-                    <h4>ID: {order.orderId}</h4>
-                    <p>Fecha: {order.timeStamp.toDate().toDateString()}</p>
+              <div key={i} className='admin-order'>
+                <div className='admin-order__header'>
+                  <div className='admin-order__info'>
+                    <h2 className='admin-order__id'>ID: {order.orderId}</h2>
+                    <p className='admin-order__date'>Fecha: {order.timeStamp.toDate().toDateString()}</p>
                   </div>
-                  <div>
-                    <p>Total: {order.totalPrice} $</p>
-                    <span className='status-tag pending'>Pendiente</span>
+                  <div className='admin-order__status'>
+                    <p className='admin-order__total'>Total: {order.totalPrice} $</p>
+                    <span className='admin-order__tag pending'>Pendiente</span>
                   </div>
                 </div>
-                <div className='admin-order-page__products'>
+                <div className='admin-order__products'>
                   {order.products.map((product: IProducts, i: number) => (
-                    <div key={i} className='admin-order-page__product'>
-                      <p className='admin-order-page__product-name'>
+                    <div key={i} className='admin-order__product'>
+                      <p className='admin-order__product-name'>
                         {product.name} - Talla: {product.selectedSize || 'N/A'} - Unidades: {product.quantity}
                       </p>
                     </div>
